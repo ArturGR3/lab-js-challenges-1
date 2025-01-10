@@ -173,45 +173,29 @@ let smalMatrix = [
   [1, 4, 3, 4, 5],
 ];
 
-function greatestProduct(matrix) {
+function greatestProduct(matrix, n = 4) {
   let maxProduct = 0;
-
   const rows = matrix.length;
   const cols = matrix[0].length;
 
-  // Check horizontally
+  // horizontally
   for (let i = 0; i < rows; i++) {
-    for (let j = 0; j <= cols - 4; j++) {
-      const product =
-        matrix[i][j] * matrix[i][j + 1] * matrix[i][j + 2] * matrix[i][j + 3];
-      console.log(
-        `Array Row:  ${[
-          matrix[i][j],
-          matrix[i][j + 1],
-          matrix[i][j + 2],
-          matrix[i][j + 3],
-        ]}`
-      );
-      console.log(`Product:  ${product}`);
+    for (let j = 0; j <= cols - n; j++) {
+      let product = 1;
+      for (let k = 0; k < n; k++) {
+        product *= matrix[i][j + k];
+      }
       maxProduct = Math.max(maxProduct, product);
     }
   }
-  console.log(`Horizontal max : ${maxProduct}`);
 
-  // Check vertically
-  for (let i = 0; i <= rows - 4; i++) {
+  // vertically
+  for (let i = 0; i <= rows - n; i++) {
     for (let j = 0; j < cols; j++) {
-      const product =
-        matrix[i][j] * matrix[i + 1][j] * matrix[i + 2][j] * matrix[i + 3][j];
-      console.log(
-        `Array Column: ${[
-          matrix[i][j],
-          matrix[i + 1][j],
-          matrix[i + 2][j],
-          matrix[i + 3][j],
-        ]}`
-      );
-      console.log(`Array Product: ${product}`);
+      let product = 1;
+      for (let k = 0; k < n; k++) {
+        product *= matrix[i + k][j];
+      }
       maxProduct = Math.max(maxProduct, product);
     }
   }
